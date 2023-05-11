@@ -8,6 +8,4 @@ def uppercase(str):
 
     print()
 
-if __name__ == "__main__":
-    uppercase("best")
-    uppercase("Best School 98 Battery street")
+
