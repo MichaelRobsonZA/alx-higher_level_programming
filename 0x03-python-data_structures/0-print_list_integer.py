@@ -1,4 +1,7 @@
 #!/usr/bin/python3
 def print_list_integer(my_list=[]):
-      for num in my_list:
-        print("{:d}".format(num))
+    for i in my_list:
+        try:
+            print("{:d}".format(i))
+        except ValueError:
+            pass
