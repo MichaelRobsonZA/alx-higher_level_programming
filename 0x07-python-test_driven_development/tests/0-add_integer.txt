@@ -1,0 +1,1 @@
+python3 -m doctest -v ./tests/0-add_integer.txt | tail -2
