@@ -9,6 +9,7 @@ class Rectangle:
     """
     Represents a rectangle
     """
+
     number_of_instances = 0
     print_symbol = "#"
 
@@ -66,8 +67,6 @@ class Rectangle:
         """
         Calculates the perimeter of the rectangle
         """
-        if self.__width == 0 or self.__height == 0:
-            return 0
         return 2 * (self.__width + self.__height)
 
     def __str__(self):
@@ -76,19 +75,32 @@ class Rectangle:
         """
         if self.__width == 0 or self.__height == 0:
             return ""
-        symbol = str(self.print_symbol)
-        rectangle = (symbol * self.__width + "\n") * self.__height
-        return rectangle[:-1]
+        rect = str(self.print_symbol) * self.__width + "\n"
+        rect = rect * self.__height
+        return rect[:-1]
 
     def __repr__(self):
         """
-        Returns a string representation of the rectangle
+        Returns a string representation that can recreate the rectangle
         """
         return "Rectangle({}, {})".format(self.__width, self.__height)
 
     def __del__(self):
         """
-        Prints a message when the rectangle is deleted
+        Prints a message when an instance of Rectangle is deleted
         """
-        Rectangle.number_of_instances -= 1
         print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
+
+
+class Square(Rectangle):
+    """
+    Represents a square, a special type of rectangle
+    """
+
+    def __init__(self, size=0):
+        """
+        Initializes a square
+        """
+        self.width = size
+        self.height = size
