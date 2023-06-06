@@ -1,7 +1,7 @@
- #!/usr/bin/python3
+#!/usr/bin/python3
 """
 Module 3-rectangle
-Define a Rectangle class
+Defines a Rectangle class
 """
 
 
@@ -79,4 +79,4 @@ class Rectangle:
         """
         Returns a string representation that can recreate the rectangle
         """
-        return "Rectangle({}, {})".format(self.__width, self.__height)
+        return "Rectangle({}, {})".format(self.__width
