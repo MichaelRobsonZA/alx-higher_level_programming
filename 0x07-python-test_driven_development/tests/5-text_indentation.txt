@@ -1,6 +1,5 @@
->>> text_indentation = __import__('5-text_indentation').text_indentation
+Test the function with a simple text:
 >>> text_indentation("Hello, world! How are you? I hope you're doing well.")
 Hello, world! How are you?
-$
+
 I hope you're doing well.
-$
