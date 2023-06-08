@@ -1,7 +1,8 @@
-guillaume@ubuntu:~/0x07$ cat tests/0-add_integer.txt
-#!/usr/bin/python3
+$ cat tests/0-add_integer.txt
+#!/usr/bin/env python3
+
 """
- module contains tests for the add_integer function.
+This file contains unit tests for the add_integer function.
 """
 
 import unittest
@@ -9,23 +10,26 @@ add_integer = __import__('0-add_integer').add_integer
 
 
 class TestAddInteger(unittest.TestCase):
-    """
-    Test cases for the add_integer function.
-    """
+    def test_addition(self):
+        self.assertEqual(add_integer(10, 5), 15)
+        self.assertEqual(add_integer(-10, -5), -15)
+        self.assertEqual(add_integer(10, -5), 5)
+        self.assertEqual(add_integer(-10, 5), -5)
+        self.assertEqual(add_integer(0, 0), 0)
 
-    def test_add_integer(self):
-        """
-        Test add_integer function with various inputs.
-        """
-        self.assertEqual(add_integer(1, 2), 3)
-        self.assertEqual(add_integer(100, -2), 98)
-        self.assertEqual(add_integer(2), 100)
-        self.assertEqual(add_integer(100.3, -2), 98)
-        with self.assertRaises(TypeError):
-            add_integer(4, "School")
-        with self.assertRaises(TypeError):
-            add_integer(None)
+    def test_casting(self):
+        self.assertEqual(add_integer(10.5, 5.2), 15)
+        self.assertEqual(add_integer(10.5, -5.2), 5)
+        self.assertEqual(add_integer(10.6, 5.5), 16)
+        self.assertEqual(add_integer(10.2, 5.5), 15)
 
+    def test_type_error(self):
+        with self.assertRaises(TypeError):
+            add_integer(10, "a")
+        with self.assertRaises(TypeError):
+            add_integer("a", 10)
+        with self.assertRaises(TypeError):
+            add_integer("a", "b")
 
 if __name__ == '__main__':
     unittest.main()
