@@ -1,35 +1,12 @@
-$ cat tests/0-add_integer.txt
-#!/usr/bin/env python3
-
-"""
-This file contains unit tests for the add_integer function.
-"""
-
-import unittest
-add_integer = __import__('0-add_integer').add_integer
-
-
-class TestAddInteger(unittest.TestCase):
-    def test_addition(self):
-        self.assertEqual(add_integer(10, 5), 15)
-        self.assertEqual(add_integer(-10, -5), -15)
-        self.assertEqual(add_integer(10, -5), 5)
-        self.assertEqual(add_integer(-10, 5), -5)
-        self.assertEqual(add_integer(0, 0), 0)
-
-    def test_casting(self):
-        self.assertEqual(add_integer(10.5, 5.2), 15)
-        self.assertEqual(add_integer(10.5, -5.2), 5)
-        self.assertEqual(add_integer(10.6, 5.5), 16)
-        self.assertEqual(add_integer(10.2, 5.5), 15)
-
-    def test_type_error(self):
-        with self.assertRaises(TypeError):
-            add_integer(10, "a")
-        with self.assertRaises(TypeError):
-            add_integer("a", 10)
-        with self.assertRaises(TypeError):
-            add_integer("a", "b")
-
-if __name__ == '__main__':
-    unittest.main()
+print(add_integer(1, 2))
+print(add_integer(100, -2))
+print(add_integer(2))
+print(add_integer(100.3, -2))
+try:
+    print(add_integer(4, "School"))
+except Exception as e:
+    print(e)
+try:
+    print(add_integer(None))
+except Exception as e:
+    print(e)
