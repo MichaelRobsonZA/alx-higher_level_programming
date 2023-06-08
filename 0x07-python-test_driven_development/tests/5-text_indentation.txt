@@ -1,5 +1,8 @@
-Test the function with a simple text:
->>> text_indentation("Hello, world! How are you? I hope you're doing well.")
-Hello, world! How are you?
+python3 -c 'print(__import__("5-text_indentation").__doc__)'
 
-I hope you're doing well.
+python3 -c 'print(__import__("5-text_indentation").text_indentation.__doc__)'
+
+python3 -m doctest -v ./tests/5-text_indentation.txt
+
+python3 -c 'from 5-text_indentation import text_indentation; text_indentation("Hello. How are you? I'm fine.")'
+
