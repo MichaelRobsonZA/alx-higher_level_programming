@@ -1,5 +1,21 @@
-python3 -c 'print(__import__("4-print_square").__doc__)'
+Test the function with a positive integer:
+>>> print_square(3)
+###
+###
+###
 
-python3 -c 'print(__import__("4-print_square").print_square.__doc__)'
+Test the function with size 0:
+>>> print_square(0)
+<BLANKLINE>
 
-python3 -m doctest -v ./tests/4-print_square.txt
+Test the function with a negative integer:
+>>> print_square(-1)
+Traceback (most recent call last):
+...
+ValueError: size must be >= 0
+
+Test the function with a float:
+>>> print_square(2.5)
+Traceback (most recent call last):
+...
+TypeError: size must be an integer

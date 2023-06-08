@@ -1,1 +1,31 @@
-python3 -m doctest -v ./tests/0-add_integer.txt | tail -2
+guillaume@ubuntu:~/0x07$ cat tests/0-add_integer.txt
+#!/usr/bin/python3
+"""
+ module contains tests for the add_integer function.
+"""
+
+import unittest
+add_integer = __import__('0-add_integer').add_integer
+
+
+class TestAddInteger(unittest.TestCase):
+    """
+    Test cases for the add_integer function.
+    """
+
+    def test_add_integer(self):
+        """
+        Test add_integer function with various inputs.
+        """
+        self.assertEqual(add_integer(1, 2), 3)
+        self.assertEqual(add_integer(100, -2), 98)
+        self.assertEqual(add_integer(2), 100)
+        self.assertEqual(add_integer(100.3, -2), 98)
+        with self.assertRaises(TypeError):
+            add_integer(4, "School")
+        with self.assertRaises(TypeError):
+            add_integer(None)
+
+
+if __name__ == '__main__':
+    unittest.main()
