@@ -21,19 +21,21 @@ class Rectangle(BaseGeometry):
         self.__width = width
         self.__height = height
 
+    def area(self):
+        """
+        Returns the area of the rectangle.
+        """
+        return self.__width * self.__height
+
+    def __str__(self):
+        """
+        Returns a string representation of the rectangle.
+        """
+        return "[Rectangle] {}/{}".format(self.__width, self.__height)
+
 
 if __name__ == "__main__":
     r = Rectangle(3, 5)
 
     print(r)
-    print(dir(r))
-
-    try:
-        print("Rectangle: {} - {}".format(r.width, r.height))
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
-
-    try:
-        r2 = Rectangle(4, True)
-    except Exception as e:
-        print("[{}] {}".format(e.__class__.__name__, e))
+    print(r.area())
