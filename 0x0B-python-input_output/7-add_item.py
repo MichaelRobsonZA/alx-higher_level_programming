@@ -12,7 +12,7 @@ load_from_json_file = __import__('6-load_from_json_file').load_from_json_file
 
 def add_item(args: List[str]) -> None:
     """
-    Function that adds all arguments to a Python list and saves them to a JSON file.
+    Function that adds all arguments to a list and saves them to a JSON file.
 
     Args:
         args (List[str]): The list of arguments.
