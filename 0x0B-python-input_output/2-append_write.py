@@ -1,19 +1,19 @@
 #!/usr/bin/python3
 """
-function that writes a string returns the number of characters written.
+function that appends a string anf returns the number of characters added.
 """
 
 
-def write_file(filename="", text=""):
+def append_write(filename="", text=""):
     """
-    Writes a string and returns the number of characters written.
+    Appends a string and returns the number of characters added.
 
     Args:
-        filename (str): The name of the file to write to.
-        text (str): The text to write to the file.
+        filename (str): The name of the file to append to.
+        text (str): The text to append to the file.
 
     Returns:
-        int: The number of characters written.
+        int: The number of characters added.
     """
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, 'a', encoding='utf-8') as f:
         return f.write(text)
