@@ -1,0 +1,41 @@
+#!/usr/bin/python3
+"""
+Module: 4-from_json_string
+Test cases for 4-from_json_string.py
+"""
+
+from_json_string = __import__('4-from_json_string').from_json_string
+
+# Test case 1: Valid JSON list
+s_my_list = "[1, 2, 3]"
+my_list = from_json_string(s_my_list)
+print(my_list)
+print(type(my_list))
+
+# Test case 2: Valid JSON dictionary
+s_my_dict = '''
+{
+    "is_active": true,
+    "info": {
+        "age": 36,
+        "average": 3.14
+    },
+    "id": 12,
+    "name": "John",
+    "places": ["San Francisco", "Tokyo"]
+}
+'''
+my_dict = from_json_string(s_my_dict)
+print(my_dict)
+print(type(my_dict))
+
+# Test case 3: Invalid JSON string
+try:
+    s_invalid_dict = '''
+    {"is_active": true, 12 }
+    '''
+    my_dict = from_json_string(s_invalid_dict)
+    print(my_dict)
+    print(type(my_dict))
+except Exception as e:
+    print("[{}] {}".format(e.__class__.__name__, e))
