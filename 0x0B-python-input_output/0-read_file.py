@@ -1,7 +1,10 @@
 #!/usr/bin/python3
-
+"""
+This module contains a function that reads a text file (UTF8) and p
 def read_file(filename=""):
     """
+
+
     Read and print the contents of a text file.
 
     Args:
