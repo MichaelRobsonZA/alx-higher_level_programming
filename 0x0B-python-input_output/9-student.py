@@ -1,8 +1,12 @@
 #!/usr/bin/python3
+"""
+This module contains a class Student that defines a student by their first name, last name, and age.
+"""
+
 
 class Student:
     """
-    Represents a student.
+    Defines a student by their first name, last name, and age.
     """
 
     def __init__(self, first_name, last_name, age):
@@ -23,6 +27,6 @@ class Student:
         Retrieves a dictionary representation of a Student instance.
 
         Returns:
-            dict: A dictionary representing the Student instance.
+            dict: A dictionary representation of the Student instance.
         """
         return self.__dict__
