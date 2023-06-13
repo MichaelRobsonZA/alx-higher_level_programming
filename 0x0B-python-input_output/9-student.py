@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module contains a class Student that defines a student by their first name, last name, and age.
+class Student that defines a student by their first name, last name, and age.
 """
 
 
