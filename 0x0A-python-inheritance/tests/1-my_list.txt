@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 """
 Module containing test cases for MyList class
 """
