@@ -1,16 +1,8 @@
 #!/usr/bin/python3
-"""
-Module containing the MyList class
-"""
 
-
-class MyList(list):
+def write_file(filename="", text=""):
     """
-    A class that inherits from the list class.
+    Writes a string to a text file (UTF8) and returns the number of characters written.
     """
-
-    def print_sorted(self):
-        """
-        Prints the list in sorted order.
-        """
-        print(sorted(self)))
+    with open(filename, 'w', encoding='utf-8') as file:
+        return file.write(text)

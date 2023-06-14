@@ -18,3 +18,4 @@
 
 >>> write_file("food.txt", "Jollof Rice\nInjera\nBobotie\nTagine\nBunny Chow\nFufu\nPap\n")
 42
+
