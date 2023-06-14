@@ -1,21 +1,24 @@
->>> write_file("countries.txt", "Ghana\nNigeria\nSouth Africa\nKenya\nEgypt\nMorocco\nEthiopia\n")
-48
+This is a test file.
+It contains multiple lines.
+The purpose is to test the write_file function.
 
->>> write_file("capital_cities.txt", "Accra\nAbuja\nPretoria\nNairobi\nCairo\nRabat\nAddis Ababa\n")
-49
+Test Case 1:
+Input: "my_first_file.txt", "This School is so cool!\n"
+Expected Output: 29
 
->>> write_file("wildlife.txt", "Lion\nElephant\nGiraffe\nCheetah\nHippopotamus\nGorilla\nZebra\n")
-46
+Test Case 2:
+Input: "empty_file.txt", ""
+Expected Output: 0
 
->>> write_file("rivers.txt", "Nile\nCongo\nNiger\nZambezi\nLimpopo\nOrange\nSenegal\n")
-40
+Test Case 3:
+Input: "numbers.txt", "12345\n"
+Expected Output: 6
 
->>> write_file("languages.txt", "Swahili\nArabic\nAmharic\nFrench\nEnglish\nYoruba\nZulu\n")
-38
+Test Case 4:
+Input: "long_text.txt", "This School is so coolThis School is so cool.\n"
+Expected Output: 61
 
->>> write_file("landmarks.txt", "Pyramids of Giza\nTable Mountain\nSerengeti National Park\nVictoria Falls\nMount Kilimanjaro\nGreat Sphinx\nKarnak Temple\n")
-83
-
->>> write_file("food.txt", "Jollof Rice\nInjera\nBobotie\nTagine\nBunny Chow\nFufu\nPap\n")
-42
+Test Case 5:
+Input: "unicode.txt", "𝓦𝓻𝓲𝓽𝓮 𝓽𝓸 𝓯𝓲𝓵𝓮 𝔀𝓲𝓽𝓱 𝓾𝓷𝓲𝓬𝓸𝓭𝓮 𝓬𝓱𝓪𝓻𝓪𝓬𝓽𝓮𝓻𝓼.\n"
+Expected Output: 61
 
