@@ -1,81 +1,83 @@
 #!/usr/bin/python3
-"""Contains classes for working with Polygons.
-"""
-from .rectangle import Rectangle
+'''Define the class Square.'''
+from models.rectangle import Rectangle
 
 
 class Square(Rectangle):
-    """Represents a polygon with 4 perpendicular and
-    equal sides.
-    """
+    '''Represent Square class.'''
 
     def __init__(self, size, x=0, y=0, id=None):
-        """Initializes a new square object.
+        '''Initialize the new Square object.
 
         Args:
-            size (int): The width and height of this square.
-            x (int): The horizontal position of this square.
-            y (int): The vertical position of this square.
-            id (int): The id of this square.
-        """
+           size (int): The size of the square.
+           x (int): The x coordinate of the square.
+           y (int): The y coordinate of the square.
+           id (int): The identity of the square.
+        '''
         super().__init__(size, size, x, y, id)
+
+    def __str__(self):
+        '''Return [Square] (<id>) <x>/<y> - <size> format.'''
+        return "[Square] ({}) {}/{} - {}".format(self.id,
+                                                 self.x, self.y,
+                                                 self.height)
 
     @property
     def size(self):
-        """Gets or sets the size of this square.
-        """
+        '''Get/Set the size of the square.'''
         return self.width
 
     @size.setter
     def size(self, value):
-        """Gets or sets the size of this square.
-        """
         self.width = value
         self.height = value
 
-    def __str__(self):
-        """Creates a string representation of this polygon.
-
-        Returns:
-            str: A string representation of this polygon.
-        """
-        parts = (
-            self.id,
-            self.x,
-            self.y,
-            self.width
-        )
-        res = '[Square] ({}) {:d}/{:d} - {:d}'.format(
-            parts[0], parts[1], parts[2], parts[3]
-        )
-        return res
-
     def update(self, *args, **kwargs):
-        """Updates the attributes of this polygon.
+        '''Update the square attributes.
 
         Args:
-            args (tuple): A tuple of non-keyword arguments.
-            kwargs (dict): A dictionary of keyword arguments.
-        """
-        attrs = ('id', 'size', 'x', 'y')
-        for key, val in zip(attrs, args):
-            setattr(self, key, val)
-        if (type(args) is None or len(args) == 0) and (type(kwargs) is dict):
-            for key, val in kwargs.items():
-                if key in attrs:
-                    setattr(self, key, val)
+           *args (ints): The list of arguments - no-keyworded arguments.
+               - 1st argument should be the id attribute.
+               - 2nd argument should be the size attribute.
+               - 3rd argument should be the x attribute.
+               - 4th argument should be the y attribute.
+            **kwargs (dict): A double pointer to a dictionary: key/value.
+        '''
+        if args and len(args) != 0:
+            argument = 0
+            for arg in args:
+                if argument == 0:
+                    if arg is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = arg
+                elif argument == 1:
+                    self.size = arg
+                elif argument == 2:
+                    self.x = arg
+                elif argument == 3:
+                    self.y = arg
+                argument += 1
+        elif kwargs and len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == 'id':
+                    if value is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = value
+                elif key == 'size':
+                    self.size = value
+                elif key == 'x':
+                    self.x = value
+                elif key == 'y':
+                    self.y = value
 
     def to_dictionary(self):
-        """Creates a dictionary representation of this polygon.
-
-        Returns:
-            dict: A dictionary representation of this polygon.
-        """
-        res = {
-            'id': self.id,
-            'size': self.size,
-            'x': self.x,
-            'y': self.y
-        }
-        return res
-
+        '''Returns the dictionary representation of a Square.'''
+        return {
+                'id': self.id,
+                'size': self.size,
+                'x': self.x,
+                'y': self.y
+                }
