@@ -1,8 +1,3 @@
-#!/usr/bin/python3
-"""
-Module containing the Base class.
-"""
-
 class Base:
     """
     The base class for all other classes in this project.
@@ -21,4 +16,3 @@ class Base:
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
-
