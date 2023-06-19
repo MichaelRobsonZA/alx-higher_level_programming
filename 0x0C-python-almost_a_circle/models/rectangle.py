@@ -1,56 +1,28 @@
 #!/usr/bin/python3
 """
-This module defines the Rectangle class.
+Module containing the Rectangle class.
 """
 
 from models.base import Base
 
-
 class Rectangle(Base):
     """
-    The Rectangle class.
+    Represents a rectangle.
     """
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, x=0, y=0, id=None):
         """
-        Initializes the Rectangle instance.
+        Initializes a Rectangle instance.
         Args:
-            width (int): The width of the instance.
-            height (int): The height of the instance.
+            width (int): The width of the rectangle.
+            height (int): The height of the rectangle.
+            x (int): The x-coordinate of the rectangle's position.
+            y (int): The y-coordinate of the rectangle's position.
+            id (int): The identifier of the instance.
         """
-        super().__init__(width, height)
-
-    def display(self):
-        """
-        Displays the Rectangle instance as a rectangle of '#' characters.
-        """
-        for _ in range(self.height):
-            print("#" * self.width)
-
-    def update(self, *args, **kwargs):
-        """
-        Updates the Rectangle instance with new values.
-        Args:
-            *args: Variable arguments in the order:
-                - 1st argument: new width value
-                - 2nd argument: new height value
-                - 3rd argument: new x value (ignored in this task)
-                - 4th argument: new y value (ignored in this task)
-            **kwargs: Variable keyword arguments:
-                - width: new width value
-                - height: new height value
-                - x (ignored in this task)
-                - y (ignored in this task)
-        """
-        if args:
-            num_args = len(args)
-            if num_args > 0:
-                self.width = args[0]
-            if num_args > 1:
-                self.height = args[1]
-        else:
-            if 'width' in kwargs:
-                self.width = kwargs['width']
-            if 'height' in kwargs:
-                self.height = kwargs['height']
+        super().__init__(id)
+        self.width = width
+        self.height = height
+        self.x = x
+        self.y = y
 
