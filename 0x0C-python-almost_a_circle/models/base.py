@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 #!/usr/bin/python3
 """Contains classes for working with Polygons.
 """
 
 
+=======
+>>>>>>> 55c74d95f7cdcf931a09813a5f38820d1646f3c3
 class Base:
     """Represents the base class for polygon objects.
     """
@@ -18,6 +21,7 @@ class Base:
         if id is None:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+<<<<<<< HEAD
         else:
             self.id = id
 
@@ -82,3 +86,5 @@ class Base:
             "id": self.id
         }
 
+=======
+>>>>>>> 55c74d95f7cdcf931a09813a5f38820d1646f3c3
