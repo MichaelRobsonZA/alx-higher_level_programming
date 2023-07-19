@@ -1,10 +1,10 @@
 -- Use hbtn_0d_tvshows database
 USE hbtn_0d_tvshows;
 
--- List genres of the show Dexter
-SELECT tv_genres.name
+-- List Comedy shows
+SELECT tv_shows.title
 FROM tv_shows
 JOIN tv_show_genres ON tv_shows.id = tv_show_genres.tv_show_id
 JOIN tv_genres ON tv_show_genres.genre_id = tv_genres.id
-WHERE tv_shows.title = 'Dexter'
-ORDER BY tv_genres.name ASC;
+WHERE tv_genres.name = 'Comedy'
+ORDER BY tv_shows.title ASC;
