@@ -14,4 +14,3 @@ if (isNaN(num)) {
 } else {
   console.log(factorial(num));
 }
-

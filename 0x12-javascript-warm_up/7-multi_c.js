@@ -7,4 +7,3 @@ if (isNaN(occurrences)) {
     console.log('C is fun');
   }
 }
-
