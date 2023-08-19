@@ -1,32 +1,21 @@
 #!/usr/bin/python3
-"""List all State objects that contain the letter a from the database
-using SQLAlchemy, but without using SQL.
-"""
+"""Lists all states with a name starting with N (upper N)
+from the database hbtn_0e_0_usa"""
 
 import sys
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from model_state import Base, State
+import MySQLdb
 
 if __name__ == "__main__":
-    # Set up the connection to the database
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
-                           pool_pre_ping=True)
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database_name = sys.argv[3]
 
-    # Create a configured "Session" class
-    Session = sessionmaker(bind=engine)
-
-    # Create a Session instance
-    session = Session()
-
-    # Query the database for states containing the letter 'a'
-    states_with_a = session.query(State).filter(State.name.like('%a%')).\
-                    order_by(State.id).all()
-
-    # Print the results
-    for state in states_with_a:
-        print("{}: {}".format(state.id, state.name))
-
-    # Close the session
-    session.close()
+    db = MySQLdb.connect
+    (host="localhost", port=3306, user=username, passwd=password, db=database_name)
+    cursor = db.cursor()
+    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id")
+    states = cursor.fetchall()
+    for state in states:
+        print(state)
+    cursor.close()
+    db.close()
