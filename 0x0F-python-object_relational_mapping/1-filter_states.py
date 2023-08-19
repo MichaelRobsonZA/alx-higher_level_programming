@@ -1,19 +1,28 @@
 #!/usr/bin/python3
-"""Lists all states with a name starting with N (upper N) from the database hbtn_0e_0_usa"""
+"""Lists all states with a name starting with N (upper N) from the DB
+hbtn_0e_0_usa using SQLAlchemy"""
 
 import sys
-import MySQLdb
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from model_state import Base, State
 
 if __name__ == "__main__":
     username = sys.argv[1]
     password = sys.argv[2]
-    database_name = sys.argv[3]
+    database = sys.argv[3]
 
-    db = MySQLdb.connect(host="localhost", port=3306, user=username, passwd=password, db=database_name)
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id")
-    states = cursor.fetchall()
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(username, password, database),
+                           pool_pre_ping=True)
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    states = session.query(State).filter(State.name.like('%N%')).order_by
+    (State.id).all()
+
     for state in states:
-        print(state)
-    cursor.close()
-    db.close()
+        print("{}: {}".format(state.id, state.name))
+
+    session.close()

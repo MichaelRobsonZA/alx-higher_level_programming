@@ -1,25 +1,28 @@
 #!/usr/bin/python3
-"""
-Reads a file, appends a string to it, and saves the changes.
-"""
+"""Lists all cities from the DB hbtn_0e_4_usa using SQLAlchemy"""
 
 import sys
-
-def manipulate_file(file_name, string_to_append):
-    try:
-        # Open the file in append mode
-        with open(file_name, "a") as file:
-            file.write(string_to_append + "\n")
-        print("String appended to the file successfully.")
-    except Exception as e:
-        print("An error occurred:", str(e))
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from model_state import Base, State
+from model_city import City
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: {} <file_name> <string_to_append>".format(sys.argv[0]))
-        sys.exit(1)
-    
-    file_name = sys.argv[1]
-    string_to_append = sys.argv[2]
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    manipulate_file(file_name, string_to_append)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(username, password, database),
+                           pool_pre_ping=True)
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    result = session.query(City, State).filter
+    (City.state_id == State.id).order_by(City.id).all()
+
+    for city, state in result:
+        print("{}: ({}) {}".format(state.name, city.id, city.name))
+
+    session.close()

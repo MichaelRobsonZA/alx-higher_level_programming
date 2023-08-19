@@ -1,32 +1,27 @@
 #!/usr/bin/python3
-"""
-Simulates a restricted access situation.
-"""
+"""Lists all cities from the database hbtn_0e_4_usa using SQLAlchemy"""
 
 import sys
-
-# Dictionary of valid credentials
-valid_credentials = {
-    "user1": "password123",
-    "user2": "qwerty456",
-    "user3": "letmein789"
-}
-
-def grant_access(username, password):
-    if username in valid_credentials and valid_credentials[username] == password:
-        return True
-    else:
-        return False
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from model_state import Base, State
+from model_city import City
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
-        print("Usage: {} <username> <password>".format(sys.argv[0]))
-        sys.exit(1)
-    
     username = sys.argv[1]
     password = sys.argv[2]
+    database = sys.argv[3]
 
-    if grant_access(username, password):
-        print("Access granted!")
-    else:
-        print("Access denied!")
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
+                           .format(username, password, database),
+                           pool_pre_ping=True)
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    cities = session.query(City).order_by(City.id).all()
+
+    for city in cities:
+        print("{}: {} -> {}".format(city.id, city.name, city.state.name))
+
+    session.close()
