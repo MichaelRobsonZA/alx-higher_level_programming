@@ -1,32 +1,33 @@
 #!/usr/bin/python3
-"""Updates the name of a city in the database"""
+"""
+Script that changes the name of a State object from the database hbtn_0e_6_usa.
+"""
 
-from db_session import get_session
-from model_city import City
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 if __name__ == "__main__":
-    # City ID and new name (change these to the actual city ID and new name)
-    city_id = 1
-    new_city_name = "Updated City Name"
+    if len(sys.argv) != 4:
+        print("Usage: {} username password database".format(sys.argv[0]))
+        exit(1)
 
-    # Get a session
-    session = get_session()
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    try:
-        # Retrieve the city from the database
-        city = session.query(City).get(city_id)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
+                           format(username, password, database),
+                           pool_pre_ping=True)
 
-        if city:
-            # Update the city's name
-            city.name = new_city_name
-            session.commit()
-            print(f"Updated city name (ID: {city.id}): {city.name}")
-        else:
-            print(f"City with ID {city_id} not found.")
-    except Exception as e:
-        # Roll back the transaction in case of an error
-        session.rollback()
-        print(f"Error: {e}")
-    finally:
-        # Close the session
-        session.close()
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    state_to_update = session.query(State).filter_by(id=2).first()
+
+    if state_to_update:
+        state_to_update.name = "New Mexico"
+        session.commit()
+
+    session.close()

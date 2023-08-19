@@ -1,31 +1,34 @@
 #!/usr/bin/python3
-"""Deletes a state from the database"""
+"""
+Script that lists all State objects that contain the letter a from the
+database hbtn_0e_6_usa.
+"""
 
-from db_session import get_session
-from model_state import State
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 if __name__ == "__main__":
-    # State ID to delete (change this to the actual state ID)
-    state_id = 1
+    if len(sys.argv) != 4:
+        print("Usage: {} username password database".format(sys.argv[0]))
+        exit(1)
 
-    # Get a session
-    session = get_session()
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    try:
-        # Retrieve the state from the database
-        state = session.query(State).get(state_id)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
+                           format(username, password, database),
+                           pool_pre_ping=True)
 
-        if state:
-            # Delete the state
-            session.delete(state)
-            session.commit()
-            print(f"Deleted state with ID {state_id}")
-        else:
-            print(f"State with ID {state_id} not found.")
-    except Exception as e:
-        # Roll back the transaction in case of an error
-        session.rollback()
-        print(f"Error: {e}")
-    finally:
-        # Close the session
-        session.close()
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    states = session.query
+    (State).filter(State.name.like('%a%')).order_by(State.id).all()
+
+    for state in states:
+        print("{}: {}".format(state.id, state.name))
+
+    session.close()

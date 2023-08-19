@@ -1,29 +1,22 @@
 #!/usr/bin/python3
-"""Adds a new city to the database"""
+"""Script that prints the State object with the name passed as an argument
+from the database hbtn_0e_6_usa.
+"""
 
-from db_session import get_session
-from model_city import City
+import sys
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
+from model_state import Base, State
 
 if __name__ == "__main__":
-    # City details
-    city_name = "New City"
-    state_id = 1  # ID of the state to associate the city with
-
-    # Get a session
-    session = get_session()
-
-    try:
-        # Create a new City object
-        new_city = City(name=city_name, state_id=state_id)
-
-        # Add the city to the database
-        session.add(new_city)
-        session.commit()
-        print(f"Added new city: {new_city.name} (ID: {new_city.id})")
-    except Exception as e:
-        # Roll back the transaction in case of an error
-        session.rollback()
-        print(f"Error: {e}")
-    finally:
-        # Close the session
-        session.close()
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'
+                           .format(sys.argv[1], sys.argv[2], sys.argv[3]),
+                           pool_pre_ping=True)
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    state = session.query(State).filter(State.name == sys.argv[4]).first()
+    if state:
+        print(state.id)
+    else:
+        print("Not found")
+    session.close()

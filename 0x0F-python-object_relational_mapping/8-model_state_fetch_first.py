@@ -1,36 +1,34 @@
 #!/usr/bin/python3
-"""Updates the name of a state in the database"""
+"""
+Script that prints the first State object from the database hbtn_0e_6_usa.
+"""
 
-from db_session import get_session
-from model_state import State
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 if __name__ == "__main__":
-    # State ID to update (change this to the actual state ID)
-    state_id = 1
+    if len(sys.argv) != 4:
+        print("Usage: {} username password database".format(sys.argv[0]))
+        exit(1)
 
-    # New name for the state
-    new_name = "Updated State Name"
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    # Get a session
-    session = get_session()
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
+                           format(username, password, database),
+                           pool_pre_ping=True)
 
-    try:
-        # Retrieve the state from the database
-        state = session.query(State).get(state_id)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-        if state:
-            # Update the state's name
-            state.name = new_name
+    first_state = session.query(State).order_by(State.id).first()
 
-            # Commit the transaction
-            session.commit()
-            print(f"Updated state name. New name: {state.name}")
-        else:
-            print(f"State with ID {state_id} not found.")
-    except Exception as e:
-        # Roll back the transaction in case of an error
-        session.rollback()
-        print(f"Error: {e}")
-    finally:
-        # Close the session
-        session.close()
+    if first_state:
+        print("{}: {}".format(first_state.id, first_state.name))
+    else:
+        print("Nothing")
+
+    session.close()

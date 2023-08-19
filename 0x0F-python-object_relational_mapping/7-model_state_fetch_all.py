@@ -1,27 +1,32 @@
 #!/usr/bin/python3
-"""Adds a new state to the database"""
+"""
+Script that lists all State objects from the database hbtn_0e_6_usa.
+"""
 
-from db_session import get_session
-from model_state import State
+import sys
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
 
 if __name__ == "__main__":
-    # Create a new state object
-    new_state = State(name='New State')
+    if len(sys.argv) != 4:
+        print("Usage: {} username password database".format(sys.argv[0]))
+        exit(1)
 
-    # Get a session
-    session = get_session()
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    try:
-        # Add the new state to the session
-        session.add(new_state)
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.
+                           format(username, password, database),
+                           pool_pre_ping=True)
 
-        # Commit the transaction
-        session.commit()
-        print(f"Added new state with ID: {new_state.id}")
-    except Exception as e:
-        # Roll back the transaction in case of an error
-        session.rollback()
-        print(f"Error: {e}")
-    finally:
-        # Close the session
-        session.close()
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    states = session.query(State).order_by(State.id).all()
+
+    for state in states:
+        print("{}: {}".format(state.id, state.name))
+
+    session.close()
