@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-"""
-Takes a URL and an email address, sends a POST request with the email as a parameter,
-and displays the response content using the requests package.
-"""
-
+import urllib.request
+import urllib.parse
 import sys
-import requests
 
-if __name__ == "__main__":
-    url = sys.argv[1]
-    email = sys.argv[2]
-    payload = {"email": email}
-    response = requests.post(url, data=payload)
-    print("Your email is:", email)
+url = sys.argv[1]
+email = sys.argv[2]
+
+data = urllib.parse.urlencode({'email': email}).encode('utf-8')
+req = urllib.request.Request(url, data=data, method='POST')
+
+with urllib.request.urlopen(req) as response:
+    content = response.read().decode('utf-8')
+    print(f"Your email is: {content}")

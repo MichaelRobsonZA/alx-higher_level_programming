@@ -1,17 +1,11 @@
 #!/usr/bin/python3
-"""
-Fetches https://alx-intranet.hbtn.io/status using the requests package
-and displays information about the response content.
-"""
+"""Fetches and displays the status from a URL using urllib."""
+import urllib.request
 
-import requests
-
-if __name__ == '__main__':
-    url = "https://alx-intranet.hbtn.io/status"
-    response = requests.get(url)
-    content_type = type(response.text).__name__
-    utf8_content = response.text
-
+url = "https://alx-intranet.hbtn.io/status"
+with urllib.request.urlopen(url) as response:
+    content = response.read()
     print("Body response:")
-    print(f"    - type: {content_type}")
-    print(f"    - content: {utf8_content}")
+    print(f"    - type: {type(content)}")
+    print(f"    - content: {content}")
+    print(f"    - utf8 content: {content.decode('utf-8')}")
