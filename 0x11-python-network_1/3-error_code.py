@@ -1,20 +1,16 @@
 #!/usr/bin/python3
 """
-Script that takes in a URL, sends a request to the URL, and displays the
-body of the response (decoded in utf-8). It manages urllib.error.HTTPError
-exceptions and prints: "Error code:" followed by the HTTP status code.
-It uses the packages urllib and sys.
+Takes a URL as input, sends a request, and displays the response content.
+If the status code is >= 400, it prints the error code.
 """
 
-import urllib.request
-import urllib.error
 import sys
+import requests
 
-url = sys.argv[1]
-
-try:
-    with urllib.request.urlopen(url) as response:
-        content = response.read().decode("utf-8")
-        print(content)
-except urllib.error.HTTPError as e:
-    print("Error code:", e.code)
+if __name__ == "__main__":
+    url = sys.argv[1]
+    response = requests.get(url)
+    if response.status_code >= 400:
+        print("Error code:", response.status_code)
+    else:
+        print(response.text)
