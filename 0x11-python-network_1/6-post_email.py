@@ -2,11 +2,8 @@
 import requests
 import sys
 
-url = sys.argv[1]
-email = sys.argv[2]
-
+url, email = sys.argv[1], sys.argv[2]
 data = {'email': email}
-response = requests.post(url, data=data)
-content = response.text
 
-print("Your email is:", content)
+response = requests.post(url, data=data)
+print("Your email is:", response.text)
