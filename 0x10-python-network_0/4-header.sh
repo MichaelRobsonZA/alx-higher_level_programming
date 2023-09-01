@@ -1,3 +1,3 @@
 #!/bin/bash
-#This Will Send a GET Request To The URL With  Aeader Variable .
-curl -sH "X-HolbertonSchool-User-Id: 98" "${1}"
+# This script sends a GET request to the URL with a header variable.
+curl -sH "X-School-User-Id: 98" "${1}"
