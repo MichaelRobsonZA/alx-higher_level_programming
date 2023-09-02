@@ -10,7 +10,7 @@ if __name__ == "__main__":
     data = {'email': email}
     response = requests.post(url, data=data)
     if response.status_code == 200:
-        print("Your email is:", response.text)
+        print("Your email is:", response.text.strip())  # Strip to remove leading/trailing whitespace
     else:
         print("Failed to post email.")
         print("HTTP status code:", response.status_code)
