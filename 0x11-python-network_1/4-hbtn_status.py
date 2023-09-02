@@ -2,10 +2,8 @@
 import requests
 
 url = "https://alx-intranet.hbtn.io/status"
-
 response = requests.get(url)
 content = response.text
-
 print("Body response:")
 print("    - type:", type(content))
 print("    - content:", content)
