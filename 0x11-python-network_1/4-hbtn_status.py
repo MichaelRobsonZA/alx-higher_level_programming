@@ -2,9 +2,10 @@
 import requests
 
 url = "https://alx-intranet.hbtn.io/status"
+
 response = requests.get(url)
-content_type = response.headers['content-type']
 content = response.text
 
 print("Body response:")
-print("\t- type:", type(content))
+print("    - type:", type(content))
+print("    - content:", content)
