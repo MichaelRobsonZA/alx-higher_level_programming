@@ -14,7 +14,7 @@ if __name__ == "__main__":
     data = {'email': email}
     response = requests.post(url, data=data)
     if response.status_code == 200:
-        print("Your email is:", response.text.strip())
+        print(response.text.strip())  # Print the response body directly
     else:
         print("Failed to post email.")
         print("HTTP status code:", response.status_code)
