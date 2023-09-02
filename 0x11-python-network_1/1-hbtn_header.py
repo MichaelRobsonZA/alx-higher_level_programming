@@ -12,7 +12,10 @@ def get_x_request_id(url):
         with urllib.request.urlopen(url) as response:
             x_request_id = response.getheader('X-Request-Id')
 
-        return x_request_id
+        if x_request_id is not None:
+            return x_request_id
+        else:
+            return None
 
     except urllib.error.URLError as e:
         return None
@@ -29,4 +32,4 @@ if __name__ == "__main__":
     if x_request_id is not None:
         print(x_request_id)
     else:
-        print("X-Request-Id header not found in the response.")
+        print(None)
