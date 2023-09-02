@@ -1,12 +1,15 @@
 #!/usr/bin/python3
+"""
+HTTP status code is greater than or equal to 400, prints error message.
+"""
 import requests
 import sys
 
-url = sys.argv[1]
-
-try:
+if __name__ == "__main__":
+    url = sys.argv[1]
     response = requests.get(url)
-    response.raise_for_status()
-    print(response.text)
-except requests.exceptions.HTTPError as e:
-    print(f"Error code: {e.response.status_code}")
+
+    if response.status_code < 400:
+        print(response.text)
+    else:
+        print(f"Error code: {response.status_code}")
