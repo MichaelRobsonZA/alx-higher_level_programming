@@ -6,6 +6,7 @@ Fetches the X-Request-Id variable from the header of a URL response.
 import urllib.request
 import sys
 
+
 def get_x_request_id(url):
     try:
         with urllib.request.urlopen(url) as response:
@@ -18,6 +19,7 @@ def get_x_request_id(url):
 
     except urllib.error.URLError as e:
         return None
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
