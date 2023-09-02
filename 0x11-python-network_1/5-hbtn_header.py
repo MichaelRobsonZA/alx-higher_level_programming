@@ -12,6 +12,6 @@ if __name__ == "__main__":
     response = requests.get(url)
     if "X-Request-Id" in response.headers:
         x_request_id = response.headers["X-Request-Id"]
-        print(x_request_id)
+        print(x_request_id.strip())
     else:
         print("X-Request-Id header not found in the response.")
